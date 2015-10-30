@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Profiles from '../component/profiles';
+
 export default class Root extends React.Component {
     constructor(props) {
         super(props);
@@ -11,8 +13,12 @@ export default class Root extends React.Component {
     }
 
     render() {
-        return <div id="root">
-            root node
+        return <div id="root" className="window">
+            <div className="window-content">
+                <div className="pane-group">
+                    <Profiles profiles={this.props.profiles} />
+                </div>
+            </div>
         </div>;
     }
 }

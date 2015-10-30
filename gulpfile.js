@@ -12,7 +12,7 @@ const DIST = 'dist';
 
 gulp.task('default', ['build']);
 
-gulp.task('build', ['html', 'js']);
+gulp.task('build', ['html', 'js', 'vendor:photon']);
 
 gulp.task('dev', ['build', 'watch'], (done) => {
     electron.start();
@@ -38,6 +38,12 @@ gulp.task('js', () => {
         .pipe(changed(DIST))
         .pipe(babel())
         .pipe(gulp.dest(DIST))
+});
+
+gulp.task('vendor:photon', () => {
+    return gulp.src('src/vendor/photon-0.1.2-dist/**/*')
+        .pipe(changed('dist/vendor/photon'))
+        .pipe(gulp.dest('dist/vendor/photon'));
 });
 
 gulp.task('test', ['power-assert', 'build'], () => {

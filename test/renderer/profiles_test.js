@@ -15,6 +15,7 @@ describe('profiles reducer', () => {
             profiles: [
                 {
                     username: 'kei_q',
+                    icon: 'https://github.com/kei_q.png',
                     path: 'meetup/28/kei_q.md'
                 }
             ]
