@@ -1,1 +1,0 @@
-// TODO: ここにrendererのコードを書く
