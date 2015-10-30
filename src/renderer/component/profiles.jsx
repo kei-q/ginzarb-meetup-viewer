@@ -25,7 +25,7 @@ class MeetupSelector extends React.Component {
             return <option key={meetup} value={meetup}>{meetup} 回</option>;
         });
 
-        return <select className="form-control" value={this.props.selected} onChange={this.handleChange.bind(this)}>
+        return <select className="form-control meetup-selector" value={this.props.selected} onChange={this.handleChange.bind(this)}>
             {options}
         </select>;
     }
@@ -51,10 +51,15 @@ export default class Profiles extends React.Component {
                 <ul className="list-group">
                     <li className="list-group-header">
                         <MeetupSelector meetups={profiles.meetups} selected={profiles.selectedMeetup} actions={this.props.actions} />
+                        <button className="btn btn-default" onClick={this.handleReload.bind(this)}>reload</button>
                     </li>
                     {items}
                 </ul>
             </nav>
         </div>;
+    }
+
+    handleReload(_event) {
+        this.props.actions.profiles.fetch();
     }
 }

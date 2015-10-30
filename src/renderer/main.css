@@ -1,3 +1,7 @@
 .checked {
     background-color: #999;
 }
+
+.meetup-selector {
+    width: 70%;
+}
