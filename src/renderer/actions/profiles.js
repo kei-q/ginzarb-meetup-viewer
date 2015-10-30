@@ -7,8 +7,10 @@ import globby from 'globby';
 import path from 'path';
 import fs from 'fs';
 
-const cloneCmd = `git clone git@github.com:ginzarb/meetups.git`;
-const updateCmd = `cd meetups; git pull origin master; cd ..`;
+const repoDir = '/tmp/ginza-meetup';
+
+const cloneCmd = `git clone git@github.com:ginzarb/meetups.git ${repoDir}`;
+const updateCmd = `cd ${repoDir}; git pull origin master`;
 
 export function fetch() {
     return (dispatch) => {
@@ -20,8 +22,8 @@ export function fetch() {
 
 export function get() {
     return (dispatch) => {
-        globby('meetups/**/*.md').then((paths) => {
-            const meetups = globby.sync('meetups/members/*').map((meetup) => {
+        globby(`${repoDir}/**/*.md`).then((paths) => {
+            const meetups = globby.sync(`${repoDir}/members/*`).map((meetup) => {
                 return path.basename(meetup);
             });
             dispatch({
