@@ -35,6 +35,3 @@ $ npm install
 $ npm run dev
 ```
 
-## 背景
-
-ginzarbでは事前に自己紹介文を投稿し、一番初めに全員でそれを見ながら
