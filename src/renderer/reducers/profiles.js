@@ -1,5 +1,8 @@
 import * as A from '../actions/profiles';
 
+// TODO: configを切り出してrebuild無しで反映されるようにしたい
+import { iconMappings } from '../../iconMappings';
+
 import path from 'path';
 
 const initialState = {
@@ -14,7 +17,8 @@ const initialState = {
 
 function makeProfileFromPath(profilePath) {
     const username = path.basename(profilePath, '.md');
-    const icon = `https://github.com/${username}.png`;
+    const iconName = iconMappings[username] || username;
+    const icon = `https://github.com/${iconName}.png`;
     return {
         username: username,
         icon: icon,
