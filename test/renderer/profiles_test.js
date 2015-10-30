@@ -11,15 +11,23 @@ describe('profiles reducer', () => {
                 'meetup/28/kei_q.md'
             ]
         };
-        const expected = {
-            profiles: [
-                {
-                    username: 'kei_q',
-                    icon: 'https://github.com/kei_q.png',
-                    path: 'meetup/28/kei_q.md'
-                }
-            ]
+        const expected = [
+            {
+                username: 'kei_q',
+                icon: 'https://github.com/kei_q.png',
+                meetup: '28',
+                path: 'meetup/28/kei_q.md'
+            }
+        ];
+        assert.deepEqual(reducer({}, action).profiles, expected);
+    });
+
+    it('select meetup', () => {
+        const action = {
+            type: actions.SELECT_MEETUP,
+            meetup: "28"
         };
-        assert.deepEqual(reducer({}, action), expected);
+        const expected = "28";
+        assert(reducer({}, action).selectedMeetup === expected);
     });
 });

@@ -16,7 +16,7 @@ export default class Root extends React.Component {
         return <div id="root" className="window">
             <div className="window-content">
                 <div className="pane-group">
-                    <Profiles profiles={this.props.profiles} />
+                    <Profiles profiles={this.props.profiles} actions={this.props.actions} />
                 </div>
             </div>
         </div>;
