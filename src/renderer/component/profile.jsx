@@ -33,6 +33,7 @@ export default class Profile extends React.Component {
         };
 
         return <div className="pane" style={style}>
+            <img className="img-circle media-object pull-right" src={this.props.icon} width="256" height="256" />
             <div className="markdown">
                 {markdownContents}
             </div>

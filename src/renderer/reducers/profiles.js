@@ -8,6 +8,7 @@ const initialState = {
     selectedMeetup: 0,
     selectedMember: '',
     profile: '',
+    icon: '',
     checked: new Set()
 };
 
@@ -45,13 +46,22 @@ export default function reducer(state = initialState, action) {
                 selectedMeetup: action.meetup
             };
         case A.SELECT_MEMBER:
+        {
             state.checked.add(action.path);
+
+            // TODO: 汚いコードなのでKAIZENすること
+            const target = state.profiles.filter((element) => {
+                return element.path === action.path;
+            })[0];
+
             return {
                 ...state,
                 selectedMember: action.path,
                 profile: action.profile,
+                icon: target.icon,
                 checked: state.checked
             };
+        }
         default:
             return state;
     }
