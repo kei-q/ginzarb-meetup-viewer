@@ -3,7 +3,11 @@ import React from 'react';
 class Item extends React.Component {
     render() {
         const profile = this.props.profile;
-        const className = this.props.selected ? "list-group-item selected" : "list-group-item";
+        let className = this.props.selected ? "list-group-item selected" : "list-group-item";
+        if (this.props.checked) {
+            className = `${className} checked`;
+        }
+
         return <li className={className} onClick={this.handleClick.bind(this)}>
             <strong>{profile.username}</strong>
             <p>{profile.path}</p>
@@ -38,7 +42,8 @@ export default class Profiles extends React.Component {
             return profile.meetup === profiles.selectedMeetup;
         }).map((profile) => {
             const selected = profile.path === profiles.selectedMember;
-            return <Item key={profile.path} profile={profile} selected={selected} actions={this.props.actions} />;
+            const checked = profiles.checked.has(profile.path);
+            return <Item key={profile.path} profile={profile} selected={selected} checked={checked} actions={this.props.actions} />;
         });
 
         return <div className="pane pane-sm sidebar note-list">

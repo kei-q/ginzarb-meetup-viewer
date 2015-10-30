@@ -6,13 +6,14 @@ const espower = require('gulp-espower');
 const electron = require('electron-connect').server.create({port: 30082});
 
 const srcHTML = 'src/**/*.html';
+const srcCSS = 'src/**/*.css';
 const srcJS = 'src/**/*.{js,jsx}';
 const srcTEST = 'test/**/*.js';
 const DIST = 'dist';
 
 gulp.task('default', ['build']);
 
-gulp.task('build', ['html', 'js', 'vendor:photon']);
+gulp.task('build', ['html', 'css', 'js', 'vendor:photon']);
 
 gulp.task('dev', ['build', 'watch'], (done) => {
     electron.start();
@@ -23,12 +24,19 @@ gulp.task('dev', ['build', 'watch'], (done) => {
 
 gulp.task('watch', (done) => {
     gulp.watch(srcHTML, ['html']);
+    gulp.watch(srcCSS, ['css']);
     gulp.watch(srcJS, ['js']);
     done();
 });
 
 gulp.task('html', () => {
     return gulp.src(srcHTML)
+        .pipe(changed(DIST))
+        .pipe(gulp.dest(DIST))
+});
+
+gulp.task('css', () => {
+    return gulp.src(srcCSS)
         .pipe(changed(DIST))
         .pipe(gulp.dest(DIST))
 });

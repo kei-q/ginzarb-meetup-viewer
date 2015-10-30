@@ -7,7 +7,8 @@ const initialState = {
     meetups: [],
     selectedMeetup: 0,
     selectedMember: '',
-    profile: ''
+    profile: '',
+    checked: new Set()
 };
 
 function makeProfileFromPath(profilePath) {
@@ -44,10 +45,12 @@ export default function reducer(state = initialState, action) {
                 selectedMeetup: action.meetup
             };
         case A.SELECT_MEMBER:
+            state.checked.add(action.path);
             return {
                 ...state,
                 selectedMember: action.path,
-                profile: action.profile
+                profile: action.profile,
+                checked: state.checked
             };
         default:
             return state;

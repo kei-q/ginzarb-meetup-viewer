@@ -32,13 +32,16 @@ describe('profiles reducer', () => {
     });
 
     it('select member', () => {
+        const initialState = {checked: new Set()};
         const action = {
             type: actions.SELECT_MEMBER,
             path: 'meetup/28/kei_q.md',
             profile: '# hoge'
         };
 
-        assert(reducer({}, action).selectedMember === 'meetup/28/kei_q.md');
-        assert(reducer({}, action).profile === '# hoge');
+        const memberPath = 'meetup/28/kei_q.md';
+        assert(reducer(initialState, action).selectedMember === memberPath);
+        assert(reducer(initialState, action).profile === '# hoge');
+        assert(reducer(initialState, action).checked.has(memberPath));
     });
 });
