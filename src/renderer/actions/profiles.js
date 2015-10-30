@@ -1,9 +1,11 @@
 export const GET_PROFILES = 'GET_PROFILES';
 export const SELECT_MEETUP = 'SELECT_MEETUP';
+export const SELECT_MEMBER = 'SELECT_MEMBER';
 
 import child_process from 'child_process';
 import globby from 'globby';
 import path from 'path';
+import fs from 'fs';
 
 const cloneCmd = `git clone git@github.com:ginzarb/meetups.git`;
 const updateCmd = `cd meetups; git pull origin master; cd ..`;
@@ -36,4 +38,16 @@ export function selectMeetup(meetup) {
         type: SELECT_MEETUP,
         meetup
     }
+}
+
+export function selectMember(path) {
+    return (dispatch) => {
+        fs.readFile(path, 'utf8', (err, data) => {
+            dispatch({
+                type: SELECT_MEMBER,
+                path,
+                profile: data
+            })
+        });
+    };
 }

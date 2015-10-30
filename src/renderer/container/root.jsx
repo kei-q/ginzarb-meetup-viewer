@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Profiles from '../component/profiles';
+import Profile from '../component/profile';
 
 export default class Root extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ export default class Root extends React.Component {
             <div className="window-content">
                 <div className="pane-group">
                     <Profiles profiles={this.props.profiles} actions={this.props.actions} />
+                    <Profile profile={this.props.profiles.profile} />
                 </div>
             </div>
         </div>;

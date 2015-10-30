@@ -30,4 +30,15 @@ describe('profiles reducer', () => {
         const expected = "28";
         assert(reducer({}, action).selectedMeetup === expected);
     });
+
+    it('select member', () => {
+        const action = {
+            type: actions.SELECT_MEMBER,
+            path: 'meetup/28/kei_q.md',
+            profile: '# hoge'
+        };
+
+        assert(reducer({}, action).selectedMember === 'meetup/28/kei_q.md');
+        assert(reducer({}, action).profile === '# hoge');
+    });
 });

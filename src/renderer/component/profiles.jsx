@@ -3,11 +3,15 @@ import React from 'react';
 class Item extends React.Component {
     render() {
         const profile = this.props.profile;
-        return <li className="list-group-item">
-            <img className="img-circle media-object pull-left" src={profile.icon} width="32" height="32" />
+        const className = this.props.selected ? "list-group-item selected" : "list-group-item";
+        return <li className={className} onClick={this.handleClick.bind(this)}>
             <strong>{profile.username}</strong>
             <p>{profile.path}</p>
         </li>;
+    }
+
+    handleClick(_event) {
+        this.props.actions.profiles.selectMember(this.props.profile.path);
     }
 }
 
@@ -33,7 +37,8 @@ export default class Profiles extends React.Component {
         const items = profiles.profiles.filter((profile) => {
             return profile.meetup === profiles.selectedMeetup;
         }).map((profile) => {
-            return <Item key={profile.path} profile={profile} />;
+            const selected = profile.path === profiles.selectedMember;
+            return <Item key={profile.path} profile={profile} selected={selected} actions={this.props.actions} />;
         });
 
         return <div className="pane pane-sm sidebar note-list">

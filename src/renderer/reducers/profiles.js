@@ -5,7 +5,9 @@ import path from 'path';
 const initialState = {
     profiles: [],
     meetups: [],
-    selectedMeetup: 0
+    selectedMeetup: 0,
+    selectedMember: '',
+    profile: ''
 };
 
 function makeProfileFromPath(profilePath) {
@@ -40,6 +42,12 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 selectedMeetup: action.meetup
+            };
+        case A.SELECT_MEMBER:
+            return {
+                ...state,
+                selectedMember: action.path,
+                profile: action.profile
             };
         default:
             return state;
